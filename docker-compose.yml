@@ -1,0 +1,13 @@
+services:
+  portfolio:
+    build: .
+    container_name: portfolio
+    expose:
+      - "80"
+    networks:
+      - taurus
+
+networks:
+  taurus:
+    external: true
+    name: taurus
