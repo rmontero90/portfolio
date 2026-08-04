@@ -1,6 +1,13 @@
 services:
-  app:
+  portfolio:
     build: .
-    container_name: portfolio-app
-    ports:
-      - "8081:80"
+    container_name: portfolio
+    expose:
+      - "80"
+    networks:
+      - taurus
+
+networks:
+  taurus:
+    external: true
+    name: taurus
