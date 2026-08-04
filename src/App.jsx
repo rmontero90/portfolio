@@ -367,7 +367,7 @@ function Sidebar({ dark, setDark, open, setOpen }) {
         <p>Full-stack engineer crafting useful, polished digital products.</p>
       </div>
       <div className="socials">
-        <a href="https://github.com" aria-label="GitHub">
+        <a href="https://github.com/rmontero90" aria-label="GitHub">
           <Icon name="github" size={17} />
         </a>
         <a href="https://linkedin.com" aria-label="LinkedIn">
