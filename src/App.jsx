@@ -358,9 +358,7 @@ function Sidebar({ dark, setDark, open, setOpen }) {
       >
         ×
       </button>
-      <a className="brand" href="#home">
-        RM<span>.</span>
-      </a>
+      <a className="brand" href="#home"></a>
       <div className="profile-mini">
         <div className="avatar-small">
           <img src="/MyAvatar.jpeg" alt="Rafael Montero" />
@@ -479,16 +477,7 @@ export default function App() {
               I’m a software engineer with 14+ years of experience across QA,
               front-end, and full-stack development, including 6+ years building
               production apps with Vue.js, React, and modern JavaScript. Strong
-              backend skills with Node.js/Express and Java Spring Boot. Check
-              out my <a href="#portfolio">project portfolio</a> and{" "}
-              <a
-                href="/Rafael_Montero_Salazar_CV.pdf"
-                target="_blank"
-                rel="noreferrer"
-              >
-                online resume
-              </a>
-              .
+              backend skills with Node.js/Express and Java Spring Boot.
             </p>
             <div className="hero-brief-actions">
               <a className="button primary" href="#portfolio">
@@ -520,9 +509,7 @@ export default function App() {
                 I have more than 10 years' experience building software for
                 clients all over the world. Below is a quick overview of my main
                 technical skill sets and technologies I use. Want to find out
-                more about my experience? Check out my{" "}
-                <a href="#resume">online resume</a> and{" "}
-                <a href="#portfolio">project portfolio</a>.
+                more about my experience?
               </p>
             </div>
 
@@ -541,7 +528,7 @@ export default function App() {
                 <span className="about-cta-icon" aria-hidden="true">
                   <Icon name="arrow" size={16} />
                 </span>
-                Services &amp; Pricing
+                Services
               </a>
             </div>
           </div>
@@ -550,7 +537,7 @@ export default function App() {
         <section className="section projects-section" id="portfolio">
           <div className="project-header">
             <SectionTitle
-              eyebrow="Selected work"
+              eyebrow="My work"
               title="Projects with purpose"
               copy="Work shaped around practical problems, long-term maintenance, and products that people actually use."
             />
@@ -568,10 +555,10 @@ export default function App() {
                     <i />
                     <b>
                       {index === 0
-                        ? "DATA / 24"
+                        ? "Part-Time DevOps"
                         : index === 1
-                          ? "$ 12,840"
-                          : "LUMA"}
+                          ? "Fullstack Vue.js and Java Spring"
+                          : "Full-Time Enterprise Projects"}
                     </b>
                   </span>
                 </div>
@@ -759,7 +746,7 @@ export default function App() {
 
             {/* Footer socials */}
             <div className="resume-footer-socials">
-              <a href="https://github.com" aria-label="GitHub">
+              <a href="https://github.com/rmontero90" aria-label="GitHub">
                 <Icon name="github" size={18} />
               </a>
               <a
