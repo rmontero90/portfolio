@@ -2,6 +2,7 @@ services:
   portfolio:
     build: .
     container_name: portfolio
+    restart: unless-stopped
     expose:
       - "80"
     networks:
