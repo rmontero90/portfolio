@@ -114,17 +114,26 @@ const projects = [
 
 const resumeExperiences = [
   {
-    title: "Full-Stack Developer",
+    title: "Full-Stack Developer — Internal Labs Project",
     company: "Gorilla Logic",
     period: "Sep 2023 – Feb 2026",
     description:
-      "Delivered AI-powered and enterprise-grade applications for US-based clients across multiple industries.",
+      "Worked on an internal project delivering AI-powered applications with agent-based tooling.",
+    bullets: [
+      "Developed React and Node.js and Python applications integrating AI agents built with LangChain and LangGraph.",
+      "Used AI-assisted development tools (Cursor, VS Code + Ollama) to improve delivery speed and code quality.",
+    ],
+  },
+  {
+    title: "Full-Stack Developer — Global Identity Platform",
+    company: "Gorilla Logic",
+    period: "Sep 2023 – Feb 2026",
+    description:
+      "Delivered enterprise-grade applications for a US-based automotive enterprise client.",
     bullets: [
       "Maintained and enhanced an Automotive Enterprise Client's global Account Identity pages on Azure, supporting users across the Americas, Asia, Europe, and the UAE.",
       "Built front-end features with Vanilla JavaScript in a large-scale, multi-region enterprise application.",
       "Implemented Adobe Analytics tagging tailored by region, country, and language.",
-      "Developed React and Node.js applications integrating AI agents built with LangChain and LangGraph.",
-      "Used AI-assisted development tools (Cursor, VS Code + Ollama) to improve delivery speed and code quality.",
     ],
   },
   {
@@ -186,6 +195,7 @@ const resumeSkills = {
     "Vue.js, React, TypeScript, JavaScript (ES6+)",
     "Node.js / Express",
     "Java / Spring Boot",
+    "Python",
     "MariaDB / MySQL / MongoDB",
     "Docker, nginx, Linux server admin",
     "AWS (EC2, Lightsail, S3, IAM)",
