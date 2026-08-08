@@ -77,6 +77,44 @@ function SectionTitle({ eyebrow, title, copy }) {
   );
 }
 
+const customSvgIcons = {
+  langchain: {
+    title: "LangChain",
+    viewBox: "0 0 100 100",
+    children: (
+      <>
+        <rect width="100" height="100" rx="22" fill="#203D3D" />
+        <path
+          d="M54.2612 54.2583L63.1942 45.3253C67.8979 40.6215 67.8979 32.9952 63.1942 28.2914C58.4904 23.5877 50.8641 23.5877 46.1603 28.2914L37.2273 37.2244"
+          stroke="#7FC8FF"
+          strokeWidth="12"
+          fill="none"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M45.7427 45.7411L36.8098 54.6741C32.106 59.3779 32.106 67.0042 36.8098 71.7079C41.5135 76.4117 49.1398 76.4117 53.8436 71.7079L62.7766 62.775"
+          stroke="#7FC8FF"
+          strokeWidth="12"
+          fill="none"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </>
+    ),
+  },
+  claude: {
+    title: "Claude",
+    viewBox: "0 0 24 24",
+    children: (
+      <path
+        d="M17.3041 3.541h-3.6718l6.696 16.918H24Zm-10.6082 0L0 20.459h3.7442l1.3693-3.5527h7.0052l1.3693 3.5528h3.7442L10.5363 3.5409Zm-.3712 10.2232 2.2914-5.9456 2.2914 5.9456Z"
+        fill="#D97757"
+      />
+    ),
+  },
+};
+
 function TechIcons({ items }) {
   return (
     <div className="tech-icons" aria-hidden="true">
@@ -85,6 +123,18 @@ function TechIcons({ items }) {
           <span key={item.badge} className="tech-badge">
             {item.badge}
           </span>
+        ) : item.svg ? (
+          <svg
+            key={item.svg}
+            className="tech-svg"
+            viewBox={customSvgIcons[item.svg]?.viewBox}
+            width="28"
+            height="28"
+            role="img"
+            title={item.label}
+          >
+            {customSvgIcons[item.svg]?.children}
+          </svg>
         ) : (
           <i
             key={item.cls}

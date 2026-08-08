@@ -19,14 +19,16 @@ const aboutSkills = [
     title: "Backend Development",
     text: (
       <>
-        Full-stack experience with Node.js/Express and Java/Spring Boot.
-        Building robust APIs and microservices for enterprise applications.
+        Full-stack experience with Node.js/Express, Java/Spring Boot, and
+        Python. Building robust APIs and microservices for enterprise
+        applications.
       </>
     ),
     icons: [
       { cls: "nodejs-plain", label: "Node.js" },
       { cls: "java-plain", label: "Java" },
       { cls: "spring-original", label: "Spring Boot" },
+      { cls: "python-plain", label: "Python" },
     ],
   },
   {
@@ -68,8 +70,8 @@ const aboutSkills = [
     ),
     icons: [
       { cls: "python-plain", label: "Python" },
-      { badge: "LangChain" },
-      { badge: "Claude" },
+      { svg: "langchain", label: "LangChain" },
+      { svg: "claude", label: "Claude" },
     ],
   },
   {
