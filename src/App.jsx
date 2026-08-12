@@ -31,10 +31,20 @@ function Sidebar({ dark, setDark, open, setOpen }) {
         <p>Full-stack engineer crafting useful, polished digital products.</p>
       </div>
       <div className="socials">
-        <a href="https://github.com/rmontero90" aria-label="GitHub">
+        <a
+          href="https://github.com/rmontero90"
+          target="_blank"
+          rel="noreferrer"
+          aria-label="GitHub"
+        >
           <Icon name="github" size={17} />
         </a>
-        <a href="https://www.linkedin.com/in/rmontero90" aria-label="LinkedIn">
+        <a
+          href="https://www.linkedin.com/in/rmontero90"
+          target="_blank"
+          rel="noreferrer"
+          aria-label="LinkedIn"
+        >
           <Icon name="linkedin" size={17} />
         </a>
         <a href="mailto:developer@rmontero.me" aria-label="Email">
