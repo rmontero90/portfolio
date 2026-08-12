@@ -162,9 +162,6 @@ const resumeExperiences = [
     bullets: [
       "Built features with Vue.js and Adobe Experience Manager (AEM).",
       "Collaborated on a large-scale redesign serving millions of users.",
-      "Test Automation with Selenium.",
-      "Lead team of QA Engineers for projects.",
-      "Contributed developing a QA/QC Application with Vue.js, which was a task beyond my QA role.",
     ],
   },
   {
@@ -173,6 +170,12 @@ const resumeExperiences = [
     period: "Jan 2015 – Aug 2018",
     description:
       "Performed manual and automated testing for the Subaru.com website across multiple release cycles.",
+    bullets: [
+      "Review of requirements and documentation and analysis of test cases.",
+      "Test Automation with Selenium.",
+      "Lead team of QA Engineers for projects.",
+      "Contributed developing a QA/QC Application with Vue.js, which was a task beyond my QA role.",
+    ],
   },
   {
     title: "QA Analyst",
