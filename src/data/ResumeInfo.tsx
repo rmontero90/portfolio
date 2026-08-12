@@ -103,14 +103,14 @@ const projects = [
     type: "Side Project · 2018 – Present",
     text: "A full-stack dress management system for a major Costa Rican retail store, built with Vue 3 and Java Spring Boot and maintained in production since 2018.",
     color: "blue",
-    tag: "Vue 3 · Spring Boot",
+    tag: "Typescript · Vue 3 · Spring Boot",
   },
   {
-    title: "Client-Facing Digital Platforms",
+    title: "Client Digital Platforms",
     type: "Professional Work · 2022 – 2026",
     text: "Delivered production systems for geospatial, automotive, and identity experiences, with an emphasis on useful interfaces, performance, and long-term maintainability.",
     color: "orange",
-    tag: "Vue · React · Node.js",
+    tag: "Vue · React · Node.js · Java · Python",
   },
 ];
 
@@ -118,11 +118,11 @@ const resumeExperiences = [
   {
     title: "Full-Stack Developer — Internal Labs Project",
     company: "Gorilla Logic",
-    period: "Sep 2023 – Feb 2026",
+    period: "Feb 2026 – Aug 2026",
     description:
       "Worked on an internal project delivering AI-powered applications with agent-based tooling.",
     bullets: [
-      "Developed React and Node.js and Python applications integrating AI agents built with LangChain and LangGraph.",
+      "Developed React, Node.js and Python applications integrating AI agents built with LangChain and LangGraph.",
       "Used AI-assisted development tools (Cursor, VS Code + Ollama) to improve delivery speed and code quality.",
     ],
   },
@@ -136,6 +136,7 @@ const resumeExperiences = [
       "Maintained and enhanced an Automotive Enterprise Client's global Account Identity pages on Azure, supporting users across the Americas, Asia, Europe, and the UAE.",
       "Built front-end features with Vanilla JavaScript in a large-scale, multi-region enterprise application.",
       "Implemented Adobe Analytics tagging tailored by region, country, and language.",
+      "Hands-on experience on Python APIs",
     ],
   },
   {
@@ -148,6 +149,7 @@ const resumeExperiences = [
       "Worked on SecureWatch using Vue.js on the front end and Java Spring on the back end.",
       "Participated in the development of the Maxar Developer Portal with Vue.js and Docusaurus.",
       "Developed client-facing communication skills through direct participation in client meetings.",
+      "Hands-on experience on modules of Java Spring APIs for SecureWatch.",
     ],
   },
   {
@@ -159,6 +161,9 @@ const resumeExperiences = [
     bullets: [
       "Built features with Vue.js and Adobe Experience Manager (AEM).",
       "Collaborated on a large-scale redesign serving millions of users.",
+      "Test Automation with Selenium.",
+      "Lead team of QA Engineers for projects.",
+      "Contributed developing a QA/QC Application with Vue.js, which was a task beyond my QA role.",
     ],
   },
   {
@@ -197,7 +202,7 @@ const resumeSkills = {
     "Vue.js, React, TypeScript, JavaScript (ES6+)",
     "Node.js / Express",
     "Java / Spring Boot",
-    "Python",
+    "Python / Django",
     "MariaDB / MySQL / MongoDB",
     "Docker, nginx, Linux server admin",
     "AWS (EC2, Lightsail, S3, IAM)",
