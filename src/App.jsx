@@ -34,7 +34,7 @@ function Sidebar({ dark, setDark, open, setOpen }) {
         <a href="https://github.com/rmontero90" aria-label="GitHub">
           <Icon name="github" size={17} />
         </a>
-        <a href="https://linkedin.com" aria-label="LinkedIn">
+        <a href="https://www.linkedin.com/in/rmontero90" aria-label="LinkedIn">
           <Icon name="linkedin" size={17} />
         </a>
         <a href="mailto:developer@rmontero.me" aria-label="Email">
