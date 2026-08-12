@@ -136,7 +136,7 @@ const resumeExperiences = [
       "Maintained and enhanced an Automotive Enterprise Client's global Account Identity pages on Azure, supporting users across the Americas, Asia, Europe, and the UAE.",
       "Built front-end features with Vanilla JavaScript in a large-scale, multi-region enterprise application.",
       "Implemented Adobe Analytics tagging tailored by region, country, and language.",
-      "Hands-on experience on Python APIs",
+      "Hands-on experience on Python APIs.",
       "Gave training and knowledge transfer for software development teams in India involves structured approaches that combine documentation, collaborative practices, and formal upskilling to bridge gaps between offshore and onshore teams.  Effective strategies include pair programming, code reviews, and mentoring to transfer tacit knowledge, while comprehensive documentation of architecture, workflows, and APIs preserves explicit knowledge. ",
     ],
   },
@@ -162,6 +162,7 @@ const resumeExperiences = [
     bullets: [
       "Built features with Vue.js and Adobe Experience Manager (AEM).",
       "Collaborated on a large-scale redesign serving millions of users.",
+      "Refactor the Vue web components to integrate with AEM HTL, Sling Models, JCR, Clientlibs Touch UI, Granite UI, Coral UI",
     ],
   },
   {
