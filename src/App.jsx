@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { pushEvent } from "./utils/gtm.js";
 import { Icon } from "./components/utils/Icon";
 import {
   aboutSkills,
@@ -167,6 +168,26 @@ export default function App() {
     document.documentElement.dataset.theme = dark ? "dark" : "light";
     localStorage.setItem("theme", dark ? "dark" : "light");
   }, [dark]);
+
+  // Push a page_view event on initial load and when the hash changes
+  useEffect(() => {
+    try {
+      pushEvent("page_view", { page_path: location.pathname + location.hash });
+    } catch (e) {
+      // ignore if analytics not initialized
+    }
+
+    const onHashChange = () => {
+      try {
+        pushEvent("page_view", {
+          page_path: location.pathname + location.hash,
+        });
+      } catch (e) {}
+    };
+
+    window.addEventListener("hashchange", onHashChange);
+    return () => window.removeEventListener("hashchange", onHashChange);
+  }, []);
 
   return (
     <>
