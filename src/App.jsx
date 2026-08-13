@@ -48,7 +48,13 @@ function Sidebar({ dark, setDark, open, setOpen }) {
         >
           <Icon name="linkedin" size={17} />
         </a>
-        <a href="mailto:developer@rmontero.me" aria-label="Email">
+        <a
+          href="mailto:developer@rmontero.me"
+          aria-label="Email"
+          onClick={() =>
+            pushEvent('contact_click', { method: 'email', label: 'sidebar' })
+          }
+        >
           <Icon name="mail" size={17} />
         </a>
       </div>
@@ -331,6 +337,12 @@ export default function App() {
               href="/Rafael_Montero_Salazar_CV_Public.pdf"
               target="_blank"
               rel="noreferrer"
+              onClick={() =>
+                pushEvent('resume_download', {
+                  label: 'resume_pdf',
+                  url: '/Rafael_Montero_Salazar_CV_Public.pdf',
+                })
+              }
             >
               <Icon name="file" size={16} /> Download PDF Version
             </a>
@@ -346,7 +358,15 @@ export default function App() {
               <ul className="resume-contact-list">
                 <li>
                   <Icon name="mail" size={15} />
-                  <a href="mailto:developer@rmontero.me">
+                  <a
+                    href="mailto:developer@rmontero.me"
+                    onClick={() =>
+                      pushEvent('contact_click', {
+                        method: 'email',
+                        label: 'resume_profile',
+                      })
+                    }
+                  >
                     developer@rmontero.me
                   </a>
                 </li>
@@ -502,7 +522,13 @@ export default function App() {
               >
                 <Icon name="linkedin" size={18} />
               </a>
-              <a href="mailto:developer@rmontero.me" aria-label="Email">
+              <a
+                href="mailto:developer@rmontero.me"
+                aria-label="Email"
+                onClick={() =>
+                  pushEvent('contact_click', { method: 'email', label: 'footer' })
+                }
+              >
                 <Icon name="mail" size={18} />
               </a>
             </div>
