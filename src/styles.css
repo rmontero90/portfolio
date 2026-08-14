@@ -183,6 +183,24 @@ main { margin-left: 278px; min-width: 0; }
 .project-copy > div { display: flex; justify-content: space-between; align-items: center; margin-top: 19px; padding-top: 16px; border-top: 1px solid var(--line); }
 .project-copy small { color: var(--muted); }.project-copy a { color: var(--green); }
 
+/* Projects toolbar and detail page styles */
+.projects-toolbar { margin-top: 18px; display: flex; align-items: center; gap: 12px; }
+.projects-toolbar .tag-list { display: flex; gap: 8px; flex-wrap: wrap; }
+.projects-toolbar .tag { background: transparent; border: 1px solid var(--line); padding: 8px 12px; border-radius: 999px; font-size: 13px; color: var(--muted); cursor: pointer; transition: .15s; }
+.projects-toolbar .tag:hover { transform: translateY(-2px); }
+.projects-toolbar .tag.active { background: var(--green); color: white; border-color: transparent; }
+
+.project-detail { padding-top: 48px; padding-bottom: 48px; }
+.project-detail-header { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 18px; }
+.project-detail-body { display: grid; grid-template-columns: 360px 1fr; gap: 28px; align-items: start; }
+.project-detail-copy p { color: var(--muted); line-height: 1.7; }
+.project-links { margin-top: 18px; display: flex; gap: 10px; }
+
+@media (max-width: 900px) {
+  .project-detail-body { grid-template-columns: 1fr; }
+  .projects-toolbar { justify-content: flex-start; }
+}
+
 /* Resume Section */
 .resume-section { padding: 70px clamp(32px, 6vw, 90px); background: var(--surface-alt); }
 .resume-section-header { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 28px; flex-wrap: wrap; }

@@ -97,6 +97,9 @@ const projects = [
     text: "I run a part-time infrastructure practice hosting WordPress sites in Docker containers across multiple VPS providers, managing Linux servers, SSL, firewalls, and CDN setup with a focus on reliability and security.",
     color: "violet",
     tag: "Docker · Linux · AWS",
+    image: "/placeholder-project-1.png",
+    demoUrl: "",
+    repoUrl: "https://github.com/rmontero90/web-hosting-infra",
   },
   {
     title: "Boutique Galatea",
@@ -104,6 +107,9 @@ const projects = [
     text: "A full-stack dress management system for a major Costa Rican retail store, built with Vue 3 and Java Spring Boot and maintained in production since 2018.",
     color: "blue",
     tag: "Typescript · Vue 3 · Spring Boot",
+    image: "/placeholder-project-2.png",
+    demoUrl: "",
+    repoUrl: "https://github.com/rmontero90/boutique-galatea",
   },
   {
     title: "Client Digital Platforms",
@@ -111,6 +117,9 @@ const projects = [
     text: "Delivered production systems for geospatial, automotive, and identity experiences, with an emphasis on useful interfaces, performance, and long-term maintainability.",
     color: "orange",
     tag: "Vue · React · Node.js · Java · Python",
+    image: "/placeholder-project-3.png",
+    demoUrl: "",
+    repoUrl: "",
   },
 ];
 
@@ -193,12 +202,14 @@ const resumeProjects = [
     type: "Self-Employed · 2017 – Present",
     description:
       "Run a part-time business hosting WordPress sites in Docker containers across multiple VPS providers (Vultr, OVHcloud, AWS). Administer Linux servers end-to-end: nginx, UFW firewall, SSH key-based auth, Let's Encrypt SSL, and Cloudflare CDN.",
+    repoUrl: "https://github.com/rmontero90/web-hosting-infra",
   },
   {
     title: "Boutique Galatea — Dress Management System",
     type: "Side Project · 2018 – Present",
     description:
       "Built and maintain a full-stack application with Vue 3 and Java Spring Boot 3 to manage wedding dress inventory for a major Costa Rica retail store. In production since 2018; upgraded to latest framework versions in 2024.",
+    repoUrl: "https://github.com/rmontero90/boutique-galatea",
   },
 ];
 

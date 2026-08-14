@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { pushEvent } from "./utils/gtm.js";
 import { Icon } from "./components/utils/Icon";
 import {
@@ -12,6 +13,10 @@ import {
   resumeInterests,
   nav,
 } from "./data/ResumeInfo";
+import { Routes, Route } from "react-router-dom";
+import ProjectCard from "./components/ProjectCard";
+import ProjectsToolbar from "./components/ProjectsToolbar";
+import ProjectPage from "./pages/ProjectPage";
 
 function Sidebar({ dark, setDark, open, setOpen }) {
   return (
@@ -195,6 +200,67 @@ export default function App() {
     return () => window.removeEventListener("hashchange", onHashChange);
   }, []);
 
+  // Tag filtering for projects
+  const [selectedTags, setSelectedTags] = useState([]);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const allTags = useMemo(() => {
+    const set = new Set();
+    projects.forEach((p) => {
+      if (!p.tag) return;
+      p.tag.split("·").forEach((t) => set.add(t.trim()));
+    });
+    return Array.from(set);
+  }, []);
+
+  const toggleTag = (tag) => {
+    setSelectedTags((prev) => {
+      if (prev.includes(tag)) return prev.filter((t) => t !== tag);
+      return [...prev, tag];
+    });
+  };
+
+  // Initialize selected tags from URL query `?tags=tag1,tag2`
+  useEffect(() => {
+    try {
+      const params = new URLSearchParams(location.search);
+      const tagsParam = params.get("tags");
+      if (tagsParam) {
+        const tags = tagsParam.split(",").map((t) => t.trim()).filter(Boolean);
+        setSelectedTags(tags);
+      }
+    } catch (e) {
+      // ignore
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location.search]);
+
+  // Reflect selectedTags into the URL as `?tags=a,b`
+  useEffect(() => {
+    try {
+      const params = new URLSearchParams(location.search);
+      if (selectedTags && selectedTags.length > 0) {
+        params.set("tags", selectedTags.join(","));
+      } else {
+        params.delete("tags");
+      }
+      const search = params.toString() ? `?${params.toString()}` : "";
+      navigate(`${location.pathname}${search}`, { replace: true });
+    } catch (e) {
+      // ignore
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedTags]);
+
+  const filteredProjects = useMemo(() => {
+    if (!selectedTags || selectedTags.length === 0) return projects;
+    return projects.filter((p) => {
+      if (!p.tag) return false;
+      const tags = p.tag.split("·").map((t) => t.trim());
+      return selectedTags.every((st) => tags.includes(st));
+    });
+  }, [selectedTags]);
+
   return (
     <>
       <Sidebar
@@ -217,340 +283,309 @@ export default function App() {
           aria-label="Close menu"
         />
       )}
-      <main>
-        <section className="hero hero-brief" id="home">
-          <div className="hero-brief-copy">
-            <h1 className="hero-name">Rafael Montero</h1>
-            <p className="hero-role">
-              Software Engineer — Full-Stack Developer
-            </p>
-            <p className="hero-desc">
-              I’m a software engineer with 14+ years of experience across QA,
-              front-end, and full-stack development, including 6+ years building
-              production apps with Vue.js, React, and modern JavaScript. Strong
-              backend skills with Node.js/Express and Java Spring Boot.
-            </p>
-            <div className="hero-brief-actions">
-              <a className="button primary" href="#portfolio">
-                <Icon name="arrowCircle" size={18} /> View Portfolio
-              </a>
-              <a className="button secondary hero-secondary" href="#resume">
-                <Icon name="file" size={18} /> View Resume
-              </a>
-            </div>
-          </div>
-          <div
-            className="hero-brief-photo"
-            aria-label="Profile photo placeholder"
-          >
-            <div className="hero-photo-frame">
-              <img className="hero-photo" src="/Me.jpeg" alt="Rafael Montero" />
-            </div>
-          </div>
-        </section>
 
-        <section className="about" id="about">
-          <div className="about-inner">
-            <div className="about-heading">
-              <div className="about-title">
-                <i className="about-accent" aria-hidden="true" />
-                <h2>What I do</h2>
-              </div>
-              <p>
-                I have more than 10 years' experience building software for
-                clients all over the world. Below is a quick overview of my main
-                technical skill sets and technologies I use. Want to find out
-                more about my experience?
-              </p>
-            </div>
-
-            <div className="about-grid">
-              {aboutSkills.map((skill) => (
-                <article className="about-skill" key={skill.title}>
-                  <TechIcons items={skill.icons} />
-                  <h3>{skill.title}</h3>
-                  <p>{skill.text}</p>
-                </article>
-              ))}
-            </div>
-
-            <div className="about-cta-row">
-              <a className="about-cta" href="#contact">
-                <span className="about-cta-icon" aria-hidden="true">
-                  <Icon name="arrow" size={16} />
-                </span>
-                Services
-              </a>
-            </div>
-          </div>
-        </section>
-
-        <section className="section projects-section" id="portfolio">
-          <div className="project-header">
-            <SectionTitle
-              eyebrow="My work"
-              title="Projects with purpose"
-              copy="Work shaped around practical problems, long-term maintenance, and products that people actually use."
-            />
-            <a href="#contact" className="text-link">
-              View all projects <Icon name="arrow" size={16} />
-            </a>
-          </div>
-          <div className="project-grid">
-            {projects.map((project, index) => (
-              <article className="project-card" key={project.title}>
-                <div className={`project-visual ${project.color}`}>
-                  <span className="mock-window">
-                    <i />
-                    <i />
-                    <i />
-                    <b>
-                      {index === 0
-                        ? "Part-Time DevOps"
-                        : index === 1
-                          ? "Fullstack Vue.js and Java Spring"
-                          : "Full-Time Enterprise Projects"}
-                    </b>
-                  </span>
-                </div>
-                <div className="project-copy">
-                  <span>{project.type}</span>
-                  <h3>{project.title}</h3>
-                  <p>{project.text}</p>
-                  <div>
-                    <small>{project.tag}</small>
-                    <a href="#contact" aria-label={`View ${project.title}`}>
-                      <Icon name="arrow" size={19} />
+      <Routes>
+        <Route
+          path="/projects/:slug"
+          element={<ProjectPage />}
+        />
+        <Route
+          path="/"
+          element={
+            <main>
+              <section className="hero hero-brief" id="home">
+                <div className="hero-brief-copy">
+                  <h1 className="hero-name">Rafael Montero</h1>
+                  <p className="hero-role">Software Engineer — Full-Stack Developer</p>
+                  <p className="hero-desc">
+                    I’m a software engineer with 14+ years of experience across QA,
+                    front-end, and full-stack development, including 6+ years building
+                    production apps with Vue.js, React, and modern JavaScript. Strong
+                    backend skills with Node.js/Express and Java Spring Boot.
+                  </p>
+                  <div className="hero-brief-actions">
+                    <a className="button primary" href="#portfolio">
+                      <Icon name="arrowCircle" size={18} /> View Portfolio
+                    </a>
+                    <a className="button secondary hero-secondary" href="#resume">
+                      <Icon name="file" size={18} /> View Resume
                     </a>
                   </div>
                 </div>
-              </article>
-            ))}
-          </div>
-        </section>
+                <div className="hero-brief-photo" aria-label="Profile photo placeholder">
+                  <div className="hero-photo-frame">
+                    <img className="hero-photo" src="/Me.jpeg" alt="Rafael Montero" />
+                  </div>
+                </div>
+              </section>
 
-        <section className="resume-section" id="resume">
-          <div className="resume-section-header">
-            <h2>Online Resume</h2>
-            <a
-              className="button secondary resume-download-btn"
-              href="/Rafael_Montero_Salazar_CV_Public.pdf"
-              target="_blank"
-              rel="noreferrer"
-              onClick={() =>
-                pushEvent('resume_download', {
-                  label: 'resume_pdf',
-                  url: '/Rafael_Montero_Salazar_CV_Public.pdf',
-                })
-              }
-            >
-              <Icon name="file" size={16} /> Download PDF Version
-            </a>
-          </div>
+              <section className="about" id="about">
+                <div className="about-inner">
+                  <div className="about-heading">
+                    <div className="about-title">
+                      <i className="about-accent" aria-hidden="true" />
+                      <h2>What I do</h2>
+                    </div>
+                    <p>
+                      I have more than 10 years' experience building software for
+                      clients all over the world. Below is a quick overview of my main
+                      technical skill sets and technologies I use. Want to find out
+                      more about my experience?
+                    </p>
+                  </div>
 
-          <article className="resume-card">
-            {/* Profile */}
-            <div className="resume-profile">
-              <div className="resume-profile-info">
-                <h2>Rafael Montero Salazar</h2>
-                <p>Software Engineer — Full-Stack Developer</p>
-              </div>
-              <ul className="resume-contact-list">
-                <li>
-                  <Icon name="mail" size={15} />
+                  <div className="about-grid">
+                    {aboutSkills.map((skill) => (
+                      <article className="about-skill" key={skill.title}>
+                        <TechIcons items={skill.icons} />
+                        <h3>{skill.title}</h3>
+                        <p>{skill.text}</p>
+                      </article>
+                    ))}
+                  </div>
+
+                  <div className="about-cta-row">
+                    <a className="about-cta" href="#contact">
+                      <span className="about-cta-icon" aria-hidden="true">
+                        <Icon name="arrow" size={16} />
+                      </span>
+                      Services
+                    </a>
+                  </div>
+                </div>
+              </section>
+
+              <section className="section projects-section" id="portfolio">
+                <div className="project-header">
+                  <SectionTitle
+                    eyebrow="My work"
+                    title="Projects with purpose"
+                    copy="Work shaped around practical problems, long-term maintenance, and products that people actually use."
+                  />
+                  <a href="#contact" className="text-link">
+                    View all projects <Icon name="arrow" size={16} />
+                  </a>
+                </div>
+
+                <ProjectsToolbar tags={allTags} selected={selectedTags} onToggle={toggleTag} />
+
+                <div className="project-grid">
+                  {filteredProjects.map((project, index) => (
+                    <ProjectCard key={project.title} project={project} index={index} />
+                  ))}
+                </div>
+              </section>
+
+              <section className="resume-section" id="resume">
+                <div className="resume-section-header">
+                  <h2>Online Resume</h2>
                   <a
-                    href="mailto:developer@rmontero.me"
+                    className="button secondary resume-download-btn"
+                    href="/Rafael_Montero_Salazar_CV_Public.pdf"
+                    target="_blank"
+                    rel="noreferrer"
                     onClick={() =>
-                      pushEvent('contact_click', {
-                        method: 'email',
-                        label: 'resume_profile',
+                      pushEvent('resume_download', {
+                        label: 'resume_pdf',
+                        url: '/Rafael_Montero_Salazar_CV_Public.pdf',
                       })
                     }
                   >
-                    developer@rmontero.me
+                    <Icon name="file" size={16} /> Download PDF Version
                   </a>
-                </li>
-                <li>
-                  <Icon name="linkedin" size={15} />
-                  <a
-                    href="https://linkedin.com/in/rmontero90"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    linkedin.com/in/rmontero90
-                  </a>
-                </li>
-                <li>
-                  <Icon name="home" size={15} />
-                  <span>Costa Rica</span>
-                </li>
-              </ul>
-            </div>
+                </div>
 
-            <hr className="resume-divider" />
-
-            {/* Summary */}
-            <div className="resume-summary">
-              <p>
-                14+ years of experience across QA, front-end, and full-stack
-                development, including 6+ years building production applications
-                with Vue.js, React, and JavaScript ES6. Strong backend skills
-                with Node.js/Express and Java Spring Boot. Delivered for
-                enterprise clients — Maxar Technologies, Automotive Enterprise
-                Client, and Subaru — across geospatial, automotive, and global
-                identity systems. Experienced integrating AI tooling (Cursor,
-                Ollama, LangChain/LangGraph) into development workflows. Manages
-                Docker-based server infrastructure as a developer/sysadmin.
-                Fully remote-capable and comfortable in direct client-facing
-                roles.
-              </p>
-            </div>
-
-            <hr className="resume-divider" />
-
-            {/* Body: main + aside */}
-            <div className="resume-body">
-              <div className="resume-main">
-                {/* Work Experiences */}
-                <div className="resume-block">
-                  <h3 className="resume-block-title">Work Experiences</h3>
-                  {resumeExperiences.map((exp) => (
-                    <div className="resume-entry" key={exp.title + exp.company}>
-                      <div className="resume-entry-header">
-                        <h4>{exp.title}</h4>
-                        <span>
-                          {exp.company} | {exp.period}
-                        </span>
-                      </div>
-                      <div className="resume-entry-body">
-                        {exp.description && <p>{exp.description}</p>}
-                        {exp.bullets && (
-                          <ul>
-                            {exp.bullets.map((b) => (
-                              <li key={b}>{b}</li>
-                            ))}
-                          </ul>
-                        )}
-                      </div>
+                <article className="resume-card">
+                  {/* Profile */}
+                  <div className="resume-profile">
+                    <div className="resume-profile-info">
+                      <h2>Rafael Montero Salazar</h2>
+                      <p>Software Engineer — Full-Stack Developer</p>
                     </div>
-                  ))}
-                </div>
-
-                {/* Projects */}
-                <div className="resume-block">
-                  <h3 className="resume-block-title">Projects</h3>
-                  {resumeProjects.map((proj) => (
-                    <div className="resume-entry" key={proj.title}>
-                      <div className="resume-entry-header">
-                        <h4>{proj.title}</h4>
-                        <span>{proj.type}</span>
-                      </div>
-                      <div className="resume-entry-body">
-                        <p>{proj.description}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <aside className="resume-aside">
-                {/* Skills */}
-                <div className="resume-aside-block">
-                  <h3 className="resume-block-title">Skills</h3>
-                  <h4>Technical</h4>
-                  <ul>
-                    {resumeSkills.technical.map((s) => (
-                      <li key={s}>{s}</li>
-                    ))}
-                  </ul>
-                  <h4>Professional</h4>
-                  <ul>
-                    {resumeSkills.professional.map((s) => (
-                      <li key={s}>{s}</li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* Education */}
-                <div className="resume-aside-block">
-                  <h3 className="resume-block-title">Education</h3>
-                  <ul className="resume-aside-list">
-                    {resumeEducation.map((e) => (
-                      <li key={e.degree}>
-                        <strong>{e.degree}</strong>
-                        <span>{e.school}</span>
-                        <span>{e.period}</span>
+                    <ul className="resume-contact-list">
+                      <li>
+                        <Icon name="mail" size={15} />
+                        <a
+                          href="mailto:developer@rmontero.me"
+                          onClick={() =>
+                            pushEvent('contact_click', {
+                              method: 'email',
+                              label: 'resume_profile',
+                            })
+                          }
+                        >
+                          developer@rmontero.me
+                        </a>
                       </li>
-                    ))}
-                  </ul>
-                </div>
+                      <li>
+                        <Icon name="linkedin" size={15} />
+                        <a href="https://linkedin.com/in/rmontero90" target="_blank" rel="noreferrer">
+                          linkedin.com/in/rmontero90
+                        </a>
+                      </li>
+                      <li>
+                        <Icon name="home" size={15} />
+                        <span>Costa Rica</span>
+                      </li>
+                    </ul>
+                  </div>
 
-                {/* Languages */}
-                <div className="resume-aside-block">
-                  <h3 className="resume-block-title">Languages</h3>
-                  <ul>
-                    {resumeLanguages.map((l) => (
-                      <li key={l}>{l}</li>
-                    ))}
-                  </ul>
-                </div>
+                  <hr className="resume-divider" />
 
-                {/* Interests */}
-                <div className="resume-aside-block">
-                  <h3 className="resume-block-title">Interests</h3>
-                  <ul>
-                    {resumeInterests.map((i) => (
-                      <li key={i}>{i}</li>
-                    ))}
-                  </ul>
-                </div>
-              </aside>
-            </div>
+                  {/* Summary */}
+                  <div className="resume-summary">
+                    <p>
+                      14+ years of experience across QA, front-end, and full-stack
+                      development, including 6+ years building production applications
+                      with Vue.js, React, and JavaScript ES6. Strong backend skills
+                      with Node.js/Express and Java Spring Boot. Delivered for
+                      enterprise clients — Maxar Technologies, Automotive Enterprise
+                      Client, and Subaru — across geospatial, automotive, and global
+                      identity systems. Experienced integrating AI tooling (Cursor,
+                      Ollama, LangChain/LangGraph) into development workflows. Manages
+                      Docker-based server infrastructure as a developer/sysadmin.
+                      Fully remote-capable and comfortable in direct client-facing
+                      roles.
+                    </p>
+                  </div>
 
-            <hr className="resume-divider" />
+                  <hr className="resume-divider" />
 
-            {/* Footer socials */}
-            <div className="resume-footer-socials">
-              <a href="https://github.com/rmontero90" aria-label="GitHub">
-                <Icon name="github" size={18} />
-              </a>
-              <a
-                href="https://linkedin.com/in/rmontero90"
-                target="_blank"
-                rel="noreferrer"
-                aria-label="LinkedIn"
-              >
-                <Icon name="linkedin" size={18} />
-              </a>
-              <a
-                href="mailto:developer@rmontero.me"
-                aria-label="Email"
-                onClick={() =>
-                  pushEvent('contact_click', { method: 'email', label: 'footer' })
-                }
-              >
-                <Icon name="mail" size={18} />
-              </a>
-            </div>
-          </article>
-        </section>
+                  {/* Body: main + aside */}
+                  <div className="resume-body">
+                    <div className="resume-main">
+                      {/* Work Experiences */}
+                      <div className="resume-block">
+                        <h3 className="resume-block-title">Work Experiences</h3>
+                        {resumeExperiences.map((exp) => (
+                          <div className="resume-entry" key={exp.title + exp.company}>
+                            <div className="resume-entry-header">
+                              <h4>{exp.title}</h4>
+                              <span>
+                                {exp.company} | {exp.period}
+                              </span>
+                            </div>
+                            <div className="resume-entry-body">
+                              {exp.description && <p>{exp.description}</p>}
+                              {exp.bullets && (
+                                <ul>
+                                  {exp.bullets.map((b) => (
+                                    <li key={b}>{b}</li>
+                                  ))}
+                                </ul>
+                              )}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
 
-        <section className="contact" id="contact">
-          <span>Have a project in mind?</span>
-          <h2>
-            Let’s make something
-            <br />
-            great together.
-          </h2>
-          <a className="button light" href="mailto:developer@rmontero.me">
-            developer@rmontero.me <Icon name="arrow" size={18} />
-          </a>
-        </section>
-        <footer>
-          <p>© {new Date().getFullYear()} Rafael Montero</p>
-          <p>Designed & built with care.</p>
-        </footer>
-      </main>
+                      {/* Projects */}
+                      <div className="resume-block">
+                        <h3 className="resume-block-title">Projects</h3>
+                        {resumeProjects.map((proj) => (
+                          <div className="resume-entry" key={proj.title}>
+                            <div className="resume-entry-header">
+                              <h4>{proj.title}</h4>
+                              <span>{proj.type}</span>
+                            </div>
+                            <div className="resume-entry-body">
+                              <p>{proj.description}</p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <aside className="resume-aside">
+                      {/* Skills */}
+                      <div className="resume-aside-block">
+                        <h3 className="resume-block-title">Skills</h3>
+                        <h4>Technical</h4>
+                        <ul>
+                          {resumeSkills.technical.map((s) => (
+                            <li key={s}>{s}</li>
+                          ))}
+                        </ul>
+                        <h4>Professional</h4>
+                        <ul>
+                          {resumeSkills.professional.map((s) => (
+                            <li key={s}>{s}</li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      {/* Education */}
+                      <div className="resume-aside-block">
+                        <h3 className="resume-block-title">Education</h3>
+                        <ul className="resume-aside-list">
+                          {resumeEducation.map((e) => (
+                            <li key={e.degree}>
+                              <strong>{e.degree}</strong>
+                              <span>{e.school}</span>
+                              <span>{e.period}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      {/* Languages */}
+                      <div className="resume-aside-block">
+                        <h3 className="resume-block-title">Languages</h3>
+                        <ul>
+                          {resumeLanguages.map((l) => (
+                            <li key={l}>{l}</li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      {/* Interests */}
+                      <div className="resume-aside-block">
+                        <h3 className="resume-block-title">Interests</h3>
+                        <ul>
+                          {resumeInterests.map((i) => (
+                            <li key={i}>{i}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    </aside>
+                  </div>
+
+                  <hr className="resume-divider" />
+
+                  {/* Footer socials */}
+                  <div className="resume-footer-socials">
+                    <a href="https://github.com/rmontero90" aria-label="GitHub">
+                      <Icon name="github" size={18} />
+                    </a>
+                    <a href="https://linkedin.com/in/rmontero90" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+                      <Icon name="linkedin" size={18} />
+                    </a>
+                    <a href="mailto:developer@rmontero.me" aria-label="Email" onClick={() => pushEvent('contact_click', { method: 'email', label: 'footer' })}>
+                      <Icon name="mail" size={18} />
+                    </a>
+                  </div>
+                </article>
+              </section>
+
+              <section className="contact" id="contact">
+                <span>Have a project in mind?</span>
+                <h2>
+                  Let’s make something
+                  <br />
+                  great together.
+                </h2>
+                <a className="button light" href="mailto:developer@rmontero.me">
+                  developer@rmontero.me <Icon name="arrow" size={18} />
+                </a>
+              </section>
+              <footer>
+                <p>© {new Date().getFullYear()} Rafael Montero</p>
+                <p>Designed & built with care.</p>
+              </footer>
+            </main>
+          }
+        />
+      </Routes>
     </>
   );
 }
