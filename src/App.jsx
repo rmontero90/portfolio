@@ -57,7 +57,7 @@ function Sidebar({ dark, setDark, open, setOpen }) {
           href="mailto:developer@rmontero.me"
           aria-label="Email"
           onClick={() =>
-            pushEvent('contact_click', { method: 'email', label: 'sidebar' })
+            pushEvent("contact_click", { method: "email", label: "sidebar" })
           }
         >
           <Icon name="mail" size={17} />
@@ -226,7 +226,10 @@ export default function App() {
       const params = new URLSearchParams(location.search);
       const tagsParam = params.get("tags");
       if (tagsParam) {
-        const tags = tagsParam.split(",").map((t) => t.trim()).filter(Boolean);
+        const tags = tagsParam
+          .split(",")
+          .map((t) => t.trim())
+          .filter(Boolean);
         setSelectedTags(tags);
       }
     } catch (e) {
@@ -285,10 +288,7 @@ export default function App() {
       )}
 
       <Routes>
-        <Route
-          path="/projects/:slug"
-          element={<ProjectPage />}
-        />
+        <Route path="/projects/:slug" element={<ProjectPage />} />
         <Route
           path="/"
           element={
@@ -296,25 +296,39 @@ export default function App() {
               <section className="hero hero-brief" id="home">
                 <div className="hero-brief-copy">
                   <h1 className="hero-name">Rafael Montero</h1>
-                  <p className="hero-role">Software Engineer — Full-Stack Developer</p>
+                  <p className="hero-role">
+                    Software Engineer — Full-Stack Developer
+                  </p>
                   <p className="hero-desc">
-                    I’m a software engineer with 14+ years of experience across QA,
-                    front-end, and full-stack development, including 6+ years building
-                    production apps with Vue.js, React, and modern JavaScript. Strong
-                    backend skills with Node.js/Express and Java Spring Boot.
+                    I’m a software engineer with 14+ years of experience across
+                    QA, front-end, and full-stack development, including 8+
+                    years building production apps with Vue.js, React, and
+                    modern JavaScript. Strong backend skills with
+                    Node.js/Express and Java Spring Boot with 4 years of
+                    experience.
                   </p>
                   <div className="hero-brief-actions">
                     <a className="button primary" href="#portfolio">
                       <Icon name="arrowCircle" size={18} /> View Portfolio
                     </a>
-                    <a className="button secondary hero-secondary" href="#resume">
+                    <a
+                      className="button secondary hero-secondary"
+                      href="#resume"
+                    >
                       <Icon name="file" size={18} /> View Resume
                     </a>
                   </div>
                 </div>
-                <div className="hero-brief-photo" aria-label="Profile photo placeholder">
+                <div
+                  className="hero-brief-photo"
+                  aria-label="Profile photo placeholder"
+                >
                   <div className="hero-photo-frame">
-                    <img className="hero-photo" src="/Me.jpeg" alt="Rafael Montero" />
+                    <img
+                      className="hero-photo"
+                      src="/Me.jpeg"
+                      alt="Rafael Montero"
+                    />
                   </div>
                 </div>
               </section>
@@ -327,10 +341,10 @@ export default function App() {
                       <h2>What I do</h2>
                     </div>
                     <p>
-                      I have more than 10 years' experience building software for
-                      clients all over the world. Below is a quick overview of my main
-                      technical skill sets and technologies I use. Want to find out
-                      more about my experience?
+                      I have more than 10 years' experience building software
+                      for clients all over the world. Below is a quick overview
+                      of my main technical skill sets and technologies I use.
+                      Want to find out more about my experience?
                     </p>
                   </div>
 
@@ -367,11 +381,19 @@ export default function App() {
                   </a>
                 </div>
 
-                <ProjectsToolbar tags={allTags} selected={selectedTags} onToggle={toggleTag} />
+                <ProjectsToolbar
+                  tags={allTags}
+                  selected={selectedTags}
+                  onToggle={toggleTag}
+                />
 
                 <div className="project-grid">
                   {filteredProjects.map((project, index) => (
-                    <ProjectCard key={project.title} project={project} index={index} />
+                    <ProjectCard
+                      key={project.title}
+                      project={project}
+                      index={index}
+                    />
                   ))}
                 </div>
               </section>
@@ -385,9 +407,9 @@ export default function App() {
                     target="_blank"
                     rel="noreferrer"
                     onClick={() =>
-                      pushEvent('resume_download', {
-                        label: 'resume_pdf',
-                        url: '/Rafael_Montero_Salazar_CV_Public.pdf',
+                      pushEvent("resume_download", {
+                        label: "resume_pdf",
+                        url: "/Rafael_Montero_Salazar_CV_Public.pdf",
                       })
                     }
                   >
@@ -408,9 +430,9 @@ export default function App() {
                         <a
                           href="mailto:developer@rmontero.me"
                           onClick={() =>
-                            pushEvent('contact_click', {
-                              method: 'email',
-                              label: 'resume_profile',
+                            pushEvent("contact_click", {
+                              method: "email",
+                              label: "resume_profile",
                             })
                           }
                         >
@@ -419,7 +441,11 @@ export default function App() {
                       </li>
                       <li>
                         <Icon name="linkedin" size={15} />
-                        <a href="https://linkedin.com/in/rmontero90" target="_blank" rel="noreferrer">
+                        <a
+                          href="https://linkedin.com/in/rmontero90"
+                          target="_blank"
+                          rel="noreferrer"
+                        >
                           linkedin.com/in/rmontero90
                         </a>
                       </li>
@@ -435,17 +461,18 @@ export default function App() {
                   {/* Summary */}
                   <div className="resume-summary">
                     <p>
-                      14+ years of experience across QA, front-end, and full-stack
-                      development, including 6+ years building production applications
-                      with Vue.js, React, and JavaScript ES6. Strong backend skills
-                      with Node.js/Express and Java Spring Boot. Delivered for
-                      enterprise clients — Maxar Technologies, Automotive Enterprise
-                      Client, and Subaru — across geospatial, automotive, and global
-                      identity systems. Experienced integrating AI tooling (Cursor,
-                      Ollama, LangChain/LangGraph) into development workflows. Manages
-                      Docker-based server infrastructure as a developer/sysadmin.
-                      Fully remote-capable and comfortable in direct client-facing
-                      roles.
+                      14+ years of experience across QA, front-end, and
+                      full-stack development, including 6+ years building
+                      production applications with Vue.js, React, and JavaScript
+                      ES6. Strong backend skills with Node.js/Express and Java
+                      Spring Boot APIs. Delivered for enterprise clients — Maxar
+                      Technologies, Automotive Enterprise Client, and Subaru —
+                      across geospatial, automotive, and global identity
+                      systems. Experienced integrating AI tooling (Cursor,
+                      Ollama, LangChain/LangGraph) into development workflows.
+                      Manages Cloud Docker-based server infrastructure as a
+                      developer/sysadmin. Fully remote-capable and comfortable
+                      in direct client-facing roles.
                     </p>
                   </div>
 
@@ -458,7 +485,10 @@ export default function App() {
                       <div className="resume-block">
                         <h3 className="resume-block-title">Work Experiences</h3>
                         {resumeExperiences.map((exp) => (
-                          <div className="resume-entry" key={exp.title + exp.company}>
+                          <div
+                            className="resume-entry"
+                            key={exp.title + exp.company}
+                          >
                             <div className="resume-entry-header">
                               <h4>{exp.title}</h4>
                               <span>
@@ -557,10 +587,24 @@ export default function App() {
                     <a href="https://github.com/rmontero90" aria-label="GitHub">
                       <Icon name="github" size={18} />
                     </a>
-                    <a href="https://linkedin.com/in/rmontero90" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+                    <a
+                      href="https://linkedin.com/in/rmontero90"
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label="LinkedIn"
+                    >
                       <Icon name="linkedin" size={18} />
                     </a>
-                    <a href="mailto:developer@rmontero.me" aria-label="Email" onClick={() => pushEvent('contact_click', { method: 'email', label: 'footer' })}>
+                    <a
+                      href="mailto:developer@rmontero.me"
+                      aria-label="Email"
+                      onClick={() =>
+                        pushEvent("contact_click", {
+                          method: "email",
+                          label: "footer",
+                        })
+                      }
+                    >
                       <Icon name="mail" size={18} />
                     </a>
                   </div>
