@@ -35,8 +35,8 @@ const aboutSkills = [
     title: "Databases & Storage",
     text: (
       <>
-        Experienced with relational databases (MySQL, MariaDB), NoSQL solutions
-        (MongoDB), and cloud storage (AWS S3).
+        Experienced with relational databases (MySQL, MariaDB, Postgress), NoSQL
+        solutions (MongoDB), and cloud storage (AWS S3).
       </>
     ),
     icons: [
@@ -49,8 +49,9 @@ const aboutSkills = [
     title: "Cloud & DevOps",
     text: (
       <>
-        Proficient with AWS services (EC2, Lightsail, IAM), Docker
-        containerization, Linux server administration, and CI/CD pipelines.
+        Proficient with AWS services (S3, EC2, Lightsail, IAM, CloudFront),
+        Docker containerization, Linux server administration, and CI/CD
+        pipelines.
       </>
     ),
     icons: [
@@ -132,7 +133,8 @@ const resumeExperiences = [
       "Worked on an internal project delivering AI-powered applications with agent-based tooling.",
     bullets: [
       "Developed React, Node.js and Python applications integrating AI agents built with LangChain and LangGraph.",
-      "Used AI-assisted development tools (Cursor, VS Code + Ollama) to improve delivery speed and code quality.",
+      "Used AI-assisted development tools (Cursor, VS Code + LLMs + Ollama) to improve delivery speed and code quality.",
+      "Developed Micro-services with Spring Boot 4 and AI LLM integrations in the APIs.",
     ],
   },
   {
@@ -145,7 +147,6 @@ const resumeExperiences = [
       "Maintained and enhanced an Automotive Enterprise Client's global Account Identity pages on Azure, supporting users across the Americas, Asia, Europe, and the UAE.",
       "Built front-end features with Vanilla JavaScript in a large-scale, multi-region enterprise application.",
       "Implemented Adobe Analytics tagging tailored by region, country, and language.",
-      "Hands-on experience on Python APIs.",
       "Gave training and knowledge transfer for software development teams in India involves structured approaches that combine documentation, collaborative practices, and formal upskilling to bridge gaps between offshore and onshore teams.  Effective strategies include pair programming, code reviews, and mentoring to transfer tacit knowledge, while comprehensive documentation of architecture, workflows, and APIs preserves explicit knowledge. ",
     ],
   },
@@ -193,6 +194,10 @@ const resumeExperiences = [
     period: "Nov 2011 – Jan 2015",
     description:
       "Conducted manual testing of medical devices for clients including Mindray, Bayer, and Abbott.",
+    bullets: [
+      "Requirements analysis and development of Test cases and Test Procedures.",
+      "Code Reviews in C/C++ of medical devices software.",
+    ],
   },
 ];
 
@@ -202,14 +207,14 @@ const resumeProjects = [
     type: "Self-Employed · 2017 – Present",
     description:
       "Run a part-time business hosting WordPress sites in Docker containers across multiple VPS providers (Vultr, OVHcloud, AWS). Administer Linux servers end-to-end: nginx, UFW firewall, SSH key-based auth, Let's Encrypt SSL, and Cloudflare CDN.",
-    repoUrl: "https://github.com/rmontero90/web-hosting-infra",
+    repoUrl: "https://github.com/rmontero90/",
   },
   {
     title: "Boutique Galatea — Dress Management System",
     type: "Side Project · 2018 – Present",
     description:
-      "Built and maintain a full-stack application with Vue 3 and Java Spring Boot 3 to manage wedding dress inventory for a major Costa Rica retail store. In production since 2018; upgraded to latest framework versions in 2024.",
-    repoUrl: "https://github.com/rmontero90/boutique-galatea",
+      "Built and maintain a full-stack application with Vue 3 and Java Spring Boot 3 to manage wedding dress inventory for a major Costa Rica retail store. In production since 2018; upgraded to latest framework versions in 2025.",
+    repoUrl: "https://github.com/rmontero90/",
   },
 ];
 
@@ -220,7 +225,7 @@ const resumeSkills = {
     "Java / Spring Boot",
     "Python / Django",
     "MariaDB / MySQL / MongoDB",
-    "Docker, nginx, Linux server admin",
+    "Cloud, Docker, nginx, Linux server admin",
     "AWS (EC2, Lightsail, S3, IAM)",
     "SCSS / Sass / Tailwind CSS",
     "LangChain, LangGraph, AI agents",
