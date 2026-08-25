@@ -465,12 +465,13 @@ export default function App() {
                       full-stack development, including 6+ years building
                       production applications with Vue.js, React, and JavaScript
                       ES6. Strong backend skills with Node.js/Express and Java
-                      Spring Boot APIs. Delivered for enterprise clients — Maxar
-                      Technologies, Automotive Enterprise Client, and Subaru —
-                      across geospatial, automotive, and global identity
-                      systems. Experienced integrating AI tooling (Cursor,
-                      Ollama, LangChain/LangGraph) into development workflows.
-                      Manages Cloud Docker-based server infrastructure as a
+                      Spring Boot, Spring Cloud and Microservices APIs.
+                      Delivered for enterprise clients — Maxar Technologies,
+                      Automotive Enterprise Client, and Subaru — across
+                      geospatial, automotive, and global identity systems.
+                      Experienced integrating AI tooling (Cursor, Ollama,
+                      LangChain/LangGraph) into development workflows. Manages
+                      Cloud Docker-based server infrastructure as a
                       developer/sysadmin. Fully remote-capable and comfortable
                       in direct client-facing roles.
                     </p>

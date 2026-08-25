@@ -160,7 +160,7 @@ const resumeExperiences = [
       "Worked on SecureWatch using Vue.js on the front end and Java Spring on the back end.",
       "Participated in the development of the Maxar Developer Portal with Vue.js and Docusaurus.",
       "Developed client-facing communication skills through direct participation in client meetings.",
-      "Hands-on experience on modules of Java Spring APIs for SecureWatch.",
+      "Hands-on experience on modules of Java Spring APIs for SecureWatch, microservices in Docker and Kubernetes environments.",
     ],
   },
   {
