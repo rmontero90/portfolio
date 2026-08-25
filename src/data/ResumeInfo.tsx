@@ -51,7 +51,7 @@ const aboutSkills = [
       <>
         Proficient with AWS services (S3, EC2, Lightsail, IAM, CloudFront),
         Docker containerization, Linux server administration, and CI/CD
-        pipelines.
+        pipelines. Spring Cloud.
       </>
     ),
     icons: [
@@ -134,7 +134,7 @@ const resumeExperiences = [
     bullets: [
       "Developed React, Node.js and Python applications integrating AI agents built with LangChain and LangGraph.",
       "Used AI-assisted development tools (Cursor, VS Code + LLMs + Ollama) to improve delivery speed and code quality.",
-      "Developed Micro-services with Spring Boot 4 and AI LLM integrations in the APIs.",
+      "Developed Micro-services with Spring Boot 4, Hiberante, JPA, Spring Cloud Config and AI LLM integrations in the APIs.",
     ],
   },
   {
